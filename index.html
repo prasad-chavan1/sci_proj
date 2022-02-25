@@ -12,6 +12,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Heart attack analysis | M.L.</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+
+    <script>
+ 
+        var datastore = {};
+
+        $( document ).ready(function() {
+ 
+        $("#Nextbtn").click(function(){
+            alert($("#exampleFormControlInput1").val);
+            $.get($("#exampleFormControlInput1").val(), function(data, status){
+                
+                csv({
+                    //output: "csv"
+                })
+                .fromString(data)
+                .then(function(result){
+                    datastore = result;
+                    //datastore.forEach(element => {
+                    //    console.log(element);
+                    //});
+
+                    first = datastore[0];         
+                    var txt  = '';
+                    for (let attr in first) {
+                        alert(attr);
+                       txt = txt + '<input class="form-check-input" type="checkbox" value="" id=chk"'+ attr+ '">'+attr+'</input>'
+                    }  
+                    $("#SelectCols").html(txt);
+
+                }); 
+
+                // List Column name as input checkbox
+                // Move to next page
+                // How to move data to next page ?
+                // Hide input text box and nex btton
+                // Display list of attribute as checkbox
+                // Show Next(new button )
+                //
+             });
+         }); 
+ 
+        });
+     </script>
 </head>
 
 <body>
@@ -24,6 +70,9 @@
         </div>
         <button type="button" id="Nextbtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
     </div>
+    <div class="container" id="SelectCols">
+
+    </div>    
     <div class="container2">
         <div  class="mb-3">
             <label for="exampleFormControlInput1"  class="form-label" style="padding-top: 20px;">Select Graph
@@ -44,19 +93,7 @@
         <button type="button"  class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
     </div>
     </div>
-    <script>
-        const next_btn = document.querySelector("#Nextbtn");
-        const container = document.querySelector(".container div");
-        const container2 = document.querySelector(".container2 div");
-
-
-        next_btn.onclick = () => {
-            container.classList.add("deactiveBlock"); 
-            container2.classList.add("activeBlock"); 
-            // console.log ('Hello');
-        }
-    </script>
-
+   
     <!-- <script src="script.js"></script> -->
 </body>
 
