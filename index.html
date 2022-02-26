@@ -17,7 +17,9 @@
     <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
 
     <script>
- 
+        const page = document.querySelector('#SelectCols');
+        const page2 = document.querySelector('#Input_URL');
+        var i = 0;
         var datastore = {};
 
         $( document ).ready(function() {
@@ -32,15 +34,16 @@
                 .fromString(data)
                 .then(function(result){
                     datastore = result;
-                    //datastore.forEach(element => {
+                    // datastore.forEach(element => {
                     //    console.log(element);
-                    //});
+                    // });
 
                     first = datastore[0];         
                     var txt  = '';
                     for (let attr in first) {
-                        alert(attr);
-                       txt = txt + '<input class="form-check-input" type="checkbox" value="" id=chk"'+ attr+ '">'+attr+'</input>'
+                        // alert(attr);
+                        i++;
+                       txt = txt + '<input class="form-check-input select" type="checkbox" value="" id=chk"'+ attr+ '">'+attr+'</input>'
                     }  
                     $("#SelectCols").html(txt);
 
@@ -52,28 +55,37 @@
                 // Hide input text box and nex btton
                 // Display list of attribute as checkbox
                 // Show Next(new button )
-                //
              });
          }); 
- 
-        });
+         // button clicked when boxes are checked
+         const myArray = [];
+         $("#lastBtn").click(function(){
+             console.log ($("#SelectCols input:checkbox:checked").each(function(){ myArray.push($(this).val()); }));
+             datastore.forEach(element => {
+                 let attr = myArray[0];
+                    console.log($(attr));
+            }); 
+         });
+    });
+
      </script>
 </head>
 
 <body>
     <!-- Complete structure of model/ project  -->
     <div class="main">
-    <div class="container">
+    <div class="container" id="Input_URL">
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label" style="padding-top: 20px;">Input Parameters</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="X-Y axes">
+            <label for="exampleFormControlInput1" class="form-label" style="padding-top: 20px;">Enter CSV File URL</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="https://raw.githubcontent.com/xyz.csv">
         </div>
         <button type="button" id="Nextbtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
     </div>
+
     <div class="container" id="SelectCols">
 
     </div>    
-    <div class="container2">
+    <!-- <div class="container2">
         <div  class="mb-3">
             <label for="exampleFormControlInput1"  class="form-label" style="padding-top: 20px;">Select Graph
                 Elements</label>
@@ -89,8 +101,8 @@
                 <option value="9">Family History</option>
                 <option value="10">Target</option>
             </select>
-        </div>
-        <button type="button"  class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
+        </div> -->
+        <button type="button" id="lastBtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
     </div>
     </div>
    
