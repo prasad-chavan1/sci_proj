@@ -1,56 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Heart attack analysis | M.L.</title>
-</head>
-<body>
-    <canvas id="chart" width:"400" height:"400"></canvas>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+
+    <!-- JAVA QUERY CODE FOR GRAPHING ELEMENTS -->
     <script>
-        const xLables = [];
-        const yLables = [];
-        chartIt();
-        async function chartIt(){
-            await getData();
-        const ctx = document.getElementById('chart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: xLables,
-                datasets: [{
-                    label: '# of ages',
-                    data: yLables,
-                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                    borderColor: 'rgba(11, 156, 49, 1)',
-                    borderWidth: 1
-                }]
-            }
-        });
-    }
-        //calling a function
-        getData();  
-        //getting data or fetching data using Java Script
-        async function getData(){  
-            //async function makes asynchronous calls with await function
-            const response = await fetch('Heart_Attack_Analysis_Data.csv');
-            const data = await response.text();  //asigning variax5-*-ble data to store all data from csv file
-            
-            const table = data.split('\n').slice(1);
-            table.forEach(row =>{
-                const coloumns = row.split(',');
-                const age = coloumns[0];
-                yLables.push(age);
-                const sex = coloumns[1];
-                //xLables.push(sex);
-                xLables.push(sex);
-                const cp_type = coloumns[2];
-                //xLables.push(cp_type);
-                console.log(age, sex, cp_type);
+        const page = document.querySelector('#SelectCols');
+        const page2 = document.querySelector('#Input_URL');
+        var i = 0;
+        var datastore = {};
+
+        $(document).ready(function () {
+
+            $("#Nextbtn").click(function () {
+                alert($("#exampleFormControlInput1").val);
+                $.get($("#exampleFormControlInput1").val(), function (data, status) {
+
+                    csv({
+                        //output: "csv"
+                    })
+                        .fromString(data)
+                        .then(function (result) {
+                            datastore = result;
+                            // datastore.forEach(element => {
+                            //    console.log(element);
+                            // });
+                            var text = ' Select X - Y Parameters ';
+                            first = datastore[0];
+                            var txt2 = '<label for="exampleFormControlInput1" class="form-label" style="padding-top: 20px;">'+text+'</label>'
+                            var txt = '';
+                            for (let attr in first) {
+                                // alert(attr);
+                                i++;
+                                txt = txt + '<input class="form-check-input select" type="checkbox" value="" id=chk"' + attr + '">' + attr + '</input>'
+                            }
+                            // $("#SelectCols").html(txt2);
+                            // $("#SelectCols").html(txt);
+                            txt2 = txt2 + txt;
+                            $("#SelectCols").html(txt2);
+
+                        });
+                    // List Column name as input checkbox
+                    // Move to next page
+                    // How to move data to next page ?
+                    // Hide input text box and nex btton
+                    // Display list of attribute as checkbox
+                    // Show Next(new button )
+                });
             });
-        }
+            // button clicked when boxes are checked
+            $("#lastBtn").click(function () {
+                var myArray = [];
+                var xLables = [];
+                var yLables = [];
+                console.log($("#SelectCols input:checkbox:checked").each(function () { myArray.push($(this).val()); }));
+                var i = 0;
+                datastore.forEach(elements => {
+                    let attr1 = myArray[i];
+                    // console.log ($('#json').text(myArray[0]));
+                    attr1 = myArray[i];
+                    xLables[i] = datastore[i][attr1];
+                    i++;
+                });
+                console.log(xLables[i]);
+            });
+        });
+
     </script>
+</head>
+
+<body>
+    <!-- Complete structure of model/ project  -->
+    <div class="main">
+        <div class="container" id="Input_URL">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label" style="padding-top: 20px;">Enter CSV File
+                    URL</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1"
+                    placeholder="https://raw.githubcontent.com/xyz.csv">
+            </div>
+            <button type="button" id="Nextbtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
+        </div>
+        
+        <!-- div class for checkboxes according to CSV file Using JQuery..-->
+        <div class="container" id="SelectCols">
+            
+        </div>
+        <button type="button" id="lastBtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
+    </div>  <!-- Closing main Div -->
+
 </body>
+
 </html>
