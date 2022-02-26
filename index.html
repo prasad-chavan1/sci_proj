@@ -22,11 +22,11 @@
         const page2 = document.querySelector('#Input_URL');
         var i = 0;
         var datastore = {};
-
+        
         $(document).ready(function () {
 
             $("#Nextbtn").click(function () {
-                alert($("#exampleFormControlInput1").val);
+//                 alert($("#exampleFormControlInput1").val);
                 $.get($("#exampleFormControlInput1").val(), function (data, status) {
 
                     csv({
