@@ -7,19 +7,42 @@
 .main{
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 40vh;
     align-items: center;
 }
-.container{
+#Input_URL{
     width: 35vw;
-    height: 24vh;
+    height: 37vh;
     background: #eaeaea;
     border-radius: 10px;
     justify-content: center;
     padding-left: 34px;
     align-items: center;
 }
-.container2{
+#SelectCols{
+    width: 35vw;
+    height: 37vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: #eaeaea;
+    border-radius: 10px;
+    justify-content: center;
+    padding-left: 34px;
+    align-items: center;
+}
+.select{
+    /* margin-top: 22px; */
+    margin-right: 3px
+}
+#SelectCols{
+    display: block;
+
+}
+.form-check-input{
+    /* margin-top: 10px; */
+    margin-left: 16px;
+}
+/* .container2{
     width: 35vw;
     height: 24vh;
     display: none;
@@ -28,17 +51,52 @@
     justify-content: center;
     padding-left: 34px;
     align-items: center;
-}
-.container2 .activeBlock{
-     display: inline;
-}
-.container .deactiveBlock{
-    /* z-index: -1; */
-    display: none;
-}
+} */
+
 .form-control{
     width: 93%;
 }
 .form-select{
     width: 93%;
+}
+#lastBtn{
+    letter-spacing: 2px;
+    position: absolute;
+    top: 24%;
+    left: 59.8%;
+}
+.graph{
+    margin-left: 20%;
+    margin-bottom: 10%;
+    height: 75vh;
+    width: 60vw;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
+#selMenu{
+    width: 35vw;
+    height: 24vh;
+    margin: 0px 5px;
+    background: #eaeaea;
+    border-radius: 10px;
+    justify-content: center;
+    padding-left: 34px;
+    align-items: center;
+}
+.menuSelect{
+    width: 58%;
+    margin-top: 1.4%;
+}
+@media screen and(max-width: 450px){
+    .main{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    #Input_URL,
+    #SelectCols{
+        width: 90vw;
+    }
 }
