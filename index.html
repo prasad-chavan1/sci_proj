@@ -34,7 +34,7 @@
         var datastore = {};
         
         $(document).ready(function () {
-
+            var typeGph = '';
             $("#Nextbtn").click(function () {
 //                 alert($("#exampleFormControlInput1").val);
                 $.get($("#exampleFormControlInput1").val(), function (data, status) {
@@ -64,18 +64,13 @@
                             $("#SelectCols").html(txt2);
 
                         });
-                    // List Column name as input checkbox
-                    // Move to next page
-                    // How to move data to next page ?
-                    // Hide input text box and nex btton
-                    // Display list of attribute as checkbox
-                    // Show Next(new button )
+                        typeGph = ($("#selectTypeGph").val());
                 });
             });
-            var typeGph = '';
-            $("#gphBtn").click(function (){
-            typeGph = ($("#selectTypeGph").val());
-            });
+            // var typeGph = '';
+            // $("#gphBtn").click(function (){
+            // typeGph = ($("#selectTypeGph").val());
+            // });
             // button clicked when boxes are checked
             $("#lastBtn").click(function () {
                 var myArray = [];
@@ -127,10 +122,17 @@
                     URL</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1"
                     placeholder="https://raw.githubcontent.com/xyz.csv">
+                    <label for="exampleFormControlInput1" class="form-label" style="padding-top: 20px;">Select Graph Type</label>
+                    <select class="form-select menuSelect" id="selectTypeGph">
+                    <option value="bar">Bar Graph</option>
+                    <option value="line">Line Graph</option>
+                    <option value="scatter">Scattered Graph</option>
+                    <option value="doughnut">Pi Chart Graph</option>
+                  </select>
             </div>
             <button type="button" id="Nextbtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
         </div>
-        <div class="container" id="selMenu">
+        <!-- <div class="container" id="selMenu">
             <select class="form-select menuSelect" id="selectTypeGph">
                 <option value="bar">Bar Graph</option>
                 <option value="line">Line Graph</option>
@@ -139,7 +141,7 @@
               </select>
         <button type="button" id="gphBtn" class="btn btn-primary" style="letter-spacing: 2px; top: 23.5%;
         position: absolute; left: 35.7%;">Next</button>
-        </div>
+        </div> -->
         
         <!-- div class for checkboxes according to CSV file Using JQuery..-->
         <div class="container" id="SelectCols" style="display: flex;
