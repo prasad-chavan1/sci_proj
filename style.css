@@ -89,14 +89,42 @@ p {
     width: 58%;
     margin-top: 1.4%;
 }
-@media screen and(max-width: 450px){
+@media(max-width: 450px){
     .main{
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
     }
-    #Input_URL,
     #SelectCols{
         width: 90vw;
+        margin-top: 10px;
+    }
+    #Input_URL {
+        width: 90vw;
+        height: 31vh;
+        background: #eaeaea;
+        margin-top: 10px;
+        border-radius: 10px;
+        justify-content: center;
+        padding-left: 34px;
+        align-items: center;
+    }
+    #lastBtn{
+        letter-spacing: 2px;
+        position: absolute;
+        top: 71%;
+        left: 13%;
+    }
+    .graph{
+        position: absolute;
+        bottom: 4%;
+        margin-left: 20%;
+        margin-bottom: 23%;
+        height: 7vh;
+        width: 83vw;
+        right: 9%;
+    }
+    .chart{
+        margin-bottom: 30px;
     }
 }
