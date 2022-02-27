@@ -135,7 +135,7 @@ p {
     #lastBtn {
         letter-spacing: 2px;
         position: absolute;
-        top: 63%;
+        top: 65%;
         left: 14%;
     }
     .graph{
@@ -175,7 +175,7 @@ p {
     }
     #selyLable {
 /*         top: 52%; */
-        top: 54.3%;
+        top: 55.3%;
         right: 34.4%;
         position: absolute;
         width: 52%;
