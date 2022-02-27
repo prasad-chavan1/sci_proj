@@ -153,12 +153,12 @@ p {
     .labX {
         position: absolute;
 /*         top: 33.7%; */
-        top: 36.7%;
+        top: 37.7%;
         right: 52.0%;
     }
     #selxLable {
 /*         top: 40%; */
-        top : 43%;
+        top : 44%;
         right: 34.4%;
         position: absolute;
         width: 52%;
@@ -166,12 +166,12 @@ p {
     .labY {
         position: absolute;
 /*         top: 47%; */
-        top: 50%;
+        top: 51%;
         right: 52.0%;
     }
     #selyLable {
 /*         top: 52%; */
-        top: 53%;
+        top: 54%;
         right: 34.4%;
         position: absolute;
         width: 52%;
