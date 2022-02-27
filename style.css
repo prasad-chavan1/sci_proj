@@ -62,7 +62,7 @@
 #lastBtn{
     letter-spacing: 2px;
     position: absolute;
-    top: 24%;
+    top: 30%;
     left: 59.8%;
 }
 .graph{
@@ -89,6 +89,28 @@ p {
     width: 58%;
     margin-top: 1.4%;
 }
+.labX{
+    position: absolute;
+    top: 1.7%;
+    right: 31.4%;
+}
+.labY{
+    position: absolute;
+    top: 16%;
+    right: 31.4%;
+}
+#selxLable{
+    top: 6%;
+    right: 21.4%;
+    position: absolute;
+    width: 19%;
+}
+#selyLable{
+    top: 19%;
+    right: 21.4%;
+    position: absolute;
+    width: 19%;
+}
 @media(max-width: 450px){
     .main{
         display: flex;
@@ -97,6 +119,7 @@ p {
     }
     #SelectCols{
         width: 90vw;
+        height: 34.6vh;
         margin-top: 10px;
     }
     #Input_URL {
@@ -109,15 +132,15 @@ p {
         padding-left: 34px;
         align-items: center;
     }
-    #lastBtn{
+    #lastBtn {
         letter-spacing: 2px;
         position: absolute;
-        top: 71%;
-        left: 13%;
+        top: 60%;
+        left: 14%;
     }
     .graph{
         position: absolute;
-        bottom: 4%;
+        bottom: 7%;
         margin-left: 20%;
         margin-bottom: 23%;
         height: 7vh;
@@ -126,5 +149,27 @@ p {
     }
     .chart{
         margin-bottom: 30px;
+    }
+    .labX {
+        position: absolute;
+        top: 33.7%;
+        right: 52.0%;
+    }
+    #selxLable {
+        top: 40%;
+        right: 34.4%;
+        position: absolute;
+        width: 52%;
+    }
+    .labY {
+        position: absolute;
+        top: 47%;
+        right: 52.0%;
+    }
+    #selyLable {
+        top: 52%;
+        right: 34.4%;
+        position: absolute;
+        width: 52%;
     }
 }
