@@ -11,12 +11,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <title>Heart attack analysis | M.L.</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
-
+    <style>
+        @media screen and(max-width: 450px){
+        .main{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+         }
+}
+    </style>
     <!-- JAVA QUERY CODE FOR GRAPHING ELEMENTS -->
+
     <script>
         const page = document.querySelector('#SelectCols');
         const page2 = document.querySelector('#Input_URL');
@@ -40,12 +50,13 @@
                             // });
                             var text = ' Select X - Y Parameters ';
                             first = datastore[0];
-                            var txt2 = '<label for="exampleFormControlInput1" class="form-label" style="padding-top: 20px;">'+text+'</label>'
+                            var txt2 = '<label for="exampleFormControlInput1" class="form-label" style="padding-top: 20px; margin-bottom: 0px;">'+text+'</label>'
                             var txt = '';
                             for (let attr in first) {
                                 // alert(attr);
+                                var paraTxt = '<p>'+ attr +'</p>';
                                 i++;
-                                txt = txt + '<input class="form-check-input select" type="checkbox" value="" id=chk"' + attr + '">' + attr + '</input>'
+                                txt = txt + '<input class="form-check-input select" type="checkbox" value="" id="' + attr + '">' + paraTxt +'</input>'
                             }
                             // $("#SelectCols").html(txt2);
                             // $("#SelectCols").html(txt);
@@ -61,21 +72,46 @@
                     // Show Next(new button )
                 });
             });
+            var typeGph = '';
+            $("#gphBtn").click(function (){
+            typeGph = ($("#selectTypeGph").val());
+            });
             // button clicked when boxes are checked
             $("#lastBtn").click(function () {
                 var myArray = [];
                 var xLables = [];
                 var yLables = [];
-                console.log($("#SelectCols input:checkbox:checked").each(function () { myArray.push($(this).val()); }));
+                var xyLables = [];
+                $("#SelectCols input:checkbox:checked").each(function () { myArray.push($(this).attr("id")); });
                 var i = 0;
+
+                console.log(myArray);
                 datastore.forEach(elements => {
-                    let attr1 = myArray[i];
+                    let attr1 = myArray[0];
+                    let attr2 = myArray[1];
                     // console.log ($('#json').text(myArray[0]));
-                    attr1 = myArray[i];
-                    xLables[i] = datastore[i][attr1];
+                    //attr1 = myArray[i];
+                    //xyLables[i] = { "x" : elements[attr1], "y" :  elements[attr2]  };
+                    xLables[i] = elements[attr1];
+                    yLables[i] = elements[attr2] ;
                     i++;
                 });
-                console.log(xLables[i]);
+                console.log(xLables);
+
+                const myChart = new Chart("chart", {
+                type: typeGph,
+                data: {
+                    labels: xLables,
+                    datasets: [{
+                        label: '# of ages',
+                        data: yLables,
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(11, 156, 49, 1)',
+                        borderWidth: 1
+                    }]
+                }
+            });
+
             });
         });
 
@@ -94,14 +130,29 @@
             </div>
             <button type="button" id="Nextbtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
         </div>
+        <div class="container" id="selMenu">
+            <select class="form-select menuSelect" id="selectTypeGph">
+                <option value="bar">Bar Graph</option>
+                <option value="line">Line Graph</option>
+                <option value="scatter">Scattered Graph</option>
+                <option value="doughnut">Pi Chart Graph</option>
+              </select>
+        <button type="button" id="gphBtn" class="btn btn-primary" style="letter-spacing: 2px; top: 23.5%;
+        position: absolute; left: 35.7%;">Next</button>
+        </div>
         
         <!-- div class for checkboxes according to CSV file Using JQuery..-->
-        <div class="container" id="SelectCols">
+        <div class="container" id="SelectCols" style="display: flex;
+                                                      flex-flow: wrap;">
             
         </div>
-        <button type="button" id="lastBtn" class="btn btn-primary" style="letter-spacing: 2px;">Next</button>
+        <button type="button" id="lastBtn" class="btn btn-primary" style="letter-spacing: 2px; top: 24%;
+        position: absolute; left: 69%;">Next</button>
     </div>  <!-- Closing main Div -->
-
+    <div class="graph">
+        <canvas id="chart" width:"400" height:"400"></canvas>
+    </div>
+    
 </body>
 
 </html>
