@@ -70,6 +70,7 @@
     margin-bottom: 10%;
     height: 75vh;
     width: 60vw;
+    cursor: crosshair;
 }
 p {
     margin-top: 0;
